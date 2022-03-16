@@ -30,7 +30,7 @@ Daca vrem sa citim un polinom custom cu gradul dorit, citim gradul de la tastatu
 
 Pentru a afisa un polinom, simplu, folosim operatorul “<<”: 
 
-# cout<<obiect1; -> x^2 + 3x + 4
+#### cout<<obiect1; -> x^2 + 3x + 4
 
 Rezultatul va fi sub forma algebrica: 
 
