@@ -23,16 +23,12 @@ Functionalitatile clasei sunt reprezentate prin posibilitatea de a aduna, scadea
 
 Pentru a citi un polinom, trebuie sa dam de la tastatura n+1 numere (unde n este gradul poinomului) reprezentand coeficientii termenilor, in ordinea descrescatoare a puterilor (Spre exemplu, pentru un obiect declarat astfel: Polynom obiect1(3); , vom avea de dat de la tastaura 4 termeni in momentul in care citim simplu.
 
-Daca vrem sa citim un polinom cu gradul cunoscut, introducem n+1 coeficienti reali, unde n este gradul sau.
-
-# cin>>obiect1; –> ex. 1 5 6 9.
-
 Daca vrem sa citim un polinom custom cu gradul dorit, citim gradul de la tastatura apoi cei n+1 coeficienti reali:
 
-# cin>>Gradul_Polinomului; -> ex. 3
-# cin>>obiect1; –> ex. 1 5 6 9.
+#### cin>>Gradul_Polinomului; -> ex. 3
+#### cin>>obiect1; –> ex. 1 5 6 9.
 
-Pentru a afisa un polinom, simplu, folosim operatorul “<<”:
+Pentru a afisa un polinom, simplu, folosim operatorul “<<”: 
 
 # cout<<obiect1; -> x^2 + 3x + 4
 
