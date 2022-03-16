@@ -4,9 +4,6 @@
 #include <vector>
 class Algebra
 {
-private:
-    unsigned int termeni;
-    double sumarad, produsrad;
 public:
     Algebra(unsigned int arg = 0);
     Algebra(Algebra&);
@@ -16,16 +13,14 @@ public:
     double getSumaRadacini();
     double getProdusRadacini();
     double getSumaRadaciniPatrate();
+private:
+    unsigned int termeni;
+    double sumarad, produsrad;
+
 };
 
 class Polynom
 {
-private:
-    unsigned int grad;
-    std::vector<double> polinom;
-    Algebra alg;
-    void alocate();
-
 public:
     Polynom(unsigned int arg = 0);
     Polynom(Polynom&);
@@ -54,6 +49,11 @@ public:
     friend std::istream& operator >> (std::istream&, Polynom&);
     friend std::ofstream& operator << (std::ofstream& , Polynom&);
     friend std::ostream& operator << (std::ostream& , Polynom&);
+private:
+    unsigned int grad;
+    std::vector<double> polinom;
+    Algebra alg;
+    void alocate();
 };
 
 #endif 

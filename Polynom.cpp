@@ -67,17 +67,21 @@ int Polynom::GetGrade()
     return this->grad;
 }
 
-void Polynom::alocate()
-{
-    int temp = this->grad + 1;
-    this->polinom.resize(temp);
-}
-
 void Polynom::SetGrade(unsigned int arg)
 {
     this->grad = arg;
     alg.setTermeni(arg);
     alocate();
+}
+
+void Polynom::alocate()
+{
+    int temp = this->grad + 1;
+    this->polinom.resize(temp);
+    for(int i=0; i< temp;i++)
+    {
+        this->polinom[i] = 0;
+    }
 }
 
 Polynom::Polynom(unsigned int arg)
@@ -227,6 +231,8 @@ Polynom operator +(Polynom& ob1, Polynom& ob2)
                 indextemp++;
             }
         }
+        if(foundfirst == 0)
+            temp.SetGrade(0);
         return temp;
     }
 }
@@ -293,6 +299,8 @@ bool operator != (Polynom& ob1, Polynom& ob2)
 }
 
 
+
+
 Polynom operator *(Polynom &ob1, Polynom &ob2)
 {
     Polynom temp;
@@ -315,6 +323,36 @@ Polynom operator *(Polynom &ob1, Polynom &ob2)
     return temp;
 }
 
+Polynom operator *(Polynom &ob1, double nr)
+{
+    if(nr == 0)
+    {
+        ob1.SetGrade(0);
+        ob1.polinom[0] = 0;
+        return ob1;
+    }
+    for(int i = 0; i<= ob1.grad; i++)
+    {
+        ob1.polinom[i] *= nr;
+    }
+    return ob1;
+}
+
+Polynom operator *(double nr, Polynom& ob1)
+{
+    if(nr == 0)
+    {
+        ob1.SetGrade(0);
+        ob1.polinom[0] = 0;
+        return ob1;
+    }
+    for(int i = 0; i<= ob1.grad; i++)
+    {
+        ob1.polinom[i] *= nr;
+    }
+    return ob1;
+}
+
 std::ifstream &operator >>(std::ifstream &stream, Polynom &ob)
 {
     for (int i = 0; i <= ob.grad; i++)
@@ -334,23 +372,31 @@ std::ofstream &operator <<(std::ofstream &stream, Polynom &ob)
     bool primul = 0;
     for (int i = 0; i <= ob.grad; i++){
         if(ob.polinom[i] != 0){
-            if(primul == 0)
-            {
-                primul = 1;
-                if(ob.polinom[i] < 0)
-                    stream << " - ";
-                stream<<ob.polinom[i]<<"x^"<<ob.grad-i;
-            }
-            else
+            if(primul == 1)
             {
                 if(ob.polinom[i] < 0)
                     stream << " - ";
                 else
                     stream << " + ";
-                stream<<ob.polinom[i]<<"x^"<<ob.grad-i;
+                if(i != ob.grad)
+                    stream<<fabs(ob.polinom[i])<<"x^"<<ob.grad-i;
+                else
+                    stream<<fabs(ob.polinom[i]);
+            }
+            if(primul == 0)
+            {
+                primul = 1;
+                if(ob.polinom[i] < 0)
+                    stream << "-";
+                if(i != ob.grad)
+                    stream<<fabs(ob.polinom[i])<<"x^"<<ob.grad-i;
+                else
+                    stream<<fabs(ob.polinom[i]);
             }
         }
     }
+    if(ob.grad == 0 && ob.polinom[0] == 0)
+        stream << 0;
     return stream;
 }
 
@@ -359,28 +405,30 @@ std::ostream &operator <<(std::ostream &stream, Polynom &ob)
     bool primul = 0;
     for (int i = 0; i <= ob.grad; i++){
         if(ob.polinom[i] != 0){
-            if(primul == 0)
-            {
-                primul = 1;
-                if(ob.polinom[i] < 0)
-                    stream << " - ";
-                if(i != ob.grad)
-                    stream<<ob.polinom[i]<<"x^"<<ob.grad-i;
-                else
-                    stream<<ob.polinom[i];
-            }
-            else
+            if(primul == 1)
             {
                 if(ob.polinom[i] < 0)
                     stream << " - ";
                 else
                     stream << " + ";
                 if(i != ob.grad)
-                    stream<<ob.polinom[i]<<"x^"<<ob.grad-i;
+                    stream<<fabs(ob.polinom[i])<<"x^"<<ob.grad-i;
                 else
-                    stream<<ob.polinom[i];
+                    stream<<fabs(ob.polinom[i]);
+            }
+            if(primul == 0)
+            {
+                primul = 1;
+                if(ob.polinom[i] < 0)
+                    stream << "- ";
+                if(i != ob.grad)
+                    stream<<fabs(ob.polinom[i])<<"x^"<<ob.grad-i;
+                else
+                    stream<<fabs(ob.polinom[i]);
             }
         }
     }
+    if(ob.grad == 0 && ob.polinom[0] == 0)
+        stream << 0;
     return stream;
 }
