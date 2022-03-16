@@ -1,11 +1,12 @@
 #include <bits/stdc++.h>
+#include <string>
 #include "Polynom.h"
 
 //functions for classes used in composition
 
 Algebra::Algebra(unsigned int arg)
 {
-    this->termeni = arg - 1;
+    this->termeni = arg + 1;
 }
 
 Algebra::Algebra(Algebra &ob)
@@ -355,6 +356,7 @@ Polynom operator *(double nr, Polynom& ob1)
 
 std::ifstream &operator >>(std::ifstream &stream, Polynom &ob)
 {
+    stream >> std::ws;
     for (int i = 0; i <= ob.grad; i++)
         stream >> ob.polinom[i];
     return stream;
@@ -362,6 +364,7 @@ std::ifstream &operator >>(std::ifstream &stream, Polynom &ob)
 
 std::istream &operator >>(std::istream &stream, Polynom &ob)
 {
+    stream >> std::ws;
     for (int i = 0; i <= ob.grad; i++)
         stream >> ob.polinom[i];
     return stream;
